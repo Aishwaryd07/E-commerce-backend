@@ -5,7 +5,7 @@
 
 const mongoose = require("mongoose");
 
-const product = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
     name : {
         type : String,
         required : true
@@ -25,7 +25,8 @@ const product = new mongoose.Schema({
     },
     id : {
         type : Number,
-        required : true,
         autoIncrement : true
     }
-})
+},{timestamps : true, versionKey : false})
+
+module.exports = mongoose.model('Product',productSchema);
