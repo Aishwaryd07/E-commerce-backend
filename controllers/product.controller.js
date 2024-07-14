@@ -136,8 +136,43 @@ exports.delete = async (req, res) =>{
 
 /**
  * list of products under a category 
+ * this can be also done in another way
  */
 
+
+/* ecomm/api/v1/products?categories = 231,3332 */
+
+exports.getProductsUnderCategory = async (req, res) =>{
+
+    let filter = {}
+
+    if(req.query.categories){
+
+        filter = {category : req.query.categories.split(",")}
+    }
+
+    if(req.query.minPrice){
+        filter.price = {$gt : req.query.minPrice}
+    }
+
+    if(req.query.maxPrice){
+        filter.price = {...filter.price, $lt: req.query.maxPrice}
+    }
+
+    const products = await productModel.find(filter)
+
+    if(!products){
+        return res.status(404).send({
+            message : "no product found in this category"
+        })
+    }
+    res.status(200).send({
+        products : products
+    })
+
+}
+
+/*
 exports.getProductsUnderCategory = async (req, res) =>{
     //get categoryId 
     const categoryId = req.params.categoryId
@@ -160,3 +195,4 @@ exports.getProductsUnderCategory = async (req, res) =>{
         })
     }
 }
+*/
