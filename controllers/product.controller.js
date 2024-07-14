@@ -133,3 +133,30 @@ exports.delete = async (req, res) =>{
         })
     }
 }
+
+/**
+ * list of products under a category 
+ */
+
+exports.getProductsUnderCategory = async (req, res) =>{
+    //get categoryId 
+    const categoryId = req.params.categoryId
+
+    try{
+        const products = await productModel.find({category : categoryId})
+        if(!products){
+            return res.status(404).send({
+                message : "category not present."
+            })
+        }
+        res.status(200).send({
+            message : "here are the products in this category",
+            products : products 
+        })
+    }catch(err){
+        console.log("some internal error while fetching the products under this category")
+        res.status(500).send({
+            message : "sorry. some internal error while deleting."
+        })
+    }
+}

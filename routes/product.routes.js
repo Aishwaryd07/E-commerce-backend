@@ -14,4 +14,5 @@ module.exports = (app) =>{
     app.get("/ecomm/api/v1/product/:id",authMW.verifyToken, productController.getById)
     app.put("/ecomm/api/v1/product/:id",[authMW.verifyToken, authMW.isAdmin],productController.update)
     app.delete("/ecomm/api/v1/product/:id",[authMW.verifyToken, authMW.isAdmin],productController.delete)
+    app.get("/ecomm/api/v1/cateories/:categoryId/products",authMW.verifyToken,productController.getProductsUnderCategory)
 }
