@@ -8,8 +8,8 @@ const reqValidator = require("../Middleware/requestValidator");
 const requestValidator = require("../Middleware/requestValidator");
 const { request } = require("express");
 
-module.exports = (app) =>{
-    //verify token removed for some time 
+module.exports = (app) =>{ 
+    
     app.post("/ecomm/api/v1/product",[authMW.verifyToken,authMW.isAdmin,requestValidator.validateProductRequest(['name','description','price','category'])],productController.addProduct)
     app.get("/ecomm/api/v1/product",authMW.verifyToken,productController.getProductsUnderCategory)
     app.get("/ecomm/api/v1/product/:id",authMW.verifyToken, productController.getById)

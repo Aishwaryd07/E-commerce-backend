@@ -66,7 +66,7 @@ const verifyToken = (req,res, next) => {
             })
         }
         //set the user info in the req body. 
-        // this is to help next middleware 
+        // this is to help next middleware as well as other controllers 
         req.user = user
 
         next()

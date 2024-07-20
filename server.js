@@ -55,6 +55,7 @@ async function init(){
 require("./routes/auth.route")(app)
 require("./routes/category.routes")(app)
 require("./routes/product.routes")(app)
+require("./routes/cart.routes")(app)
 
 
 app.listen(server_config.Port, ()=>{
